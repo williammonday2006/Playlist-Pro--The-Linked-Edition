@@ -1,38 +1,31 @@
-import java.util.Iterator;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
-        SinglyLinkedList playlist = new SinglyLinkedList();
+        Song takeControl = new Song("Take Control", "Old Gods of Asgard", 453);
+        Song youWouldntKnow = new Song("You Wouldn't Know", "Jonathan Coulton, Ellen McLain", 197);
+        Song littleWolf = new Song("Little Wolf", "Jorge Rivera-Herrans", 195);
 
-        playlist.addLast(new Song("Take Control", "Old Gods of Asgard", 453));
-        playlist.addLast(new Song("You Wouldn't Know", "Jonathan Coulton, Ellen McLain", 197));
-        playlist.addLast(new Song("Little Wolf", "Jorge Rivera-Herrans", 195));
+        SortedLinkedList titlePlaylist = new SortedLinkedList(
+            Comparator.comparing(song -> song.getTitle(), String.CASE_INSENSITIVE_ORDER)
+        );
 
-        System.out.println("Original Playlist:");
-        for (Song song : playlist) {
-            System.out.println(song);
-        }
+        titlePlaylist.addLast(takeControl);
+        titlePlaylist.addLast(youWouldntKnow);
+        titlePlaylist.addLast(littleWolf);
 
-        Iterator<Song> iterator = playlist.iterator();
+        System.out.println("Sorted by Title:");
+        titlePlaylist.display();
 
-        while (iterator.hasNext()) {
-            Song song = iterator.next();
+        SortedLinkedList artistPlaylist = new SortedLinkedList(
+            Comparator.comparing(song -> song.getArtist(), String.CASE_INSENSITIVE_ORDER)
+        );
 
-            if (song.toString().startsWith("You Wouldn't Know")) {
-                iterator.remove();
-                break;
-            }
-        }
+        artistPlaylist.addLast(takeControl);
+        artistPlaylist.addLast(youWouldntKnow);
+        artistPlaylist.addLast(littleWolf);
 
-        System.out.println("\nAfter Removing a Song:");
-        playlist.display();
-
-        playlist.add(1, new Song("New Song", "Test Artist", 200));
-
-        System.out.println("\nAfter Inserting at Index 1:");
-        playlist.display();
-
-        System.out.println("\nSong at Index 1:");
-        System.out.println(playlist.get(1));
+        System.out.println("\nSorted by Artist:");
+        artistPlaylist.display();
     }
 }

@@ -9,3 +9,7 @@ I implemented an iterator to loop through the playlist and remove songs. Removin
 # Phase 3
 
 I added methods to retrieve and insert songs by index. A linked list must traverse nodes to reach a position, while an array can access an index directly. Inserting into a linked list requires updating references, while an array may need to shift elements.
+
+# Phase 4
+
+I created a SortedLinkedList that uses a Comparator to automatically organize songs by title or artist. This makes the code more flexible because I can change the sorting rule without rewriting the linked list.

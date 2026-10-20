@@ -15,4 +15,11 @@ public class Song {
         int seconds = duration % 60;
         return title + " by " + artist + " (" + minutes + ":" + String.format("%02d", seconds) + ")";
     }
+    public String getTitle() {
+    return title;
+    }
+
+    public String getArtist() {
+    return artist;
+    }
 }
