@@ -1,31 +1,47 @@
 import java.util.Comparator;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
-        Song takeControl = new Song("Take Control", "Old Gods of Asgard", 453);
-        Song youWouldntKnow = new Song("You Wouldn't Know", "Jonathan Coulton, Ellen McLain", 197);
-        Song littleWolf = new Song("Little Wolf", "Jorge Rivera-Herrans", 195);
+        SinglyLinkedList playlist = new SinglyLinkedList();
 
-        SortedLinkedList titlePlaylist = new SortedLinkedList(
-            Comparator.comparing(song -> song.getTitle(), String.CASE_INSENSITIVE_ORDER)
+        System.out.println("Test 1: Add to Empty List");
+        playlist.addLast(new Song("Take Control", "Old Gods of Asgard", 453));
+        playlist.display();
+
+        System.out.println("\nTest 2: Insert at Index 0");
+        playlist.add(0, new Song("Little Wolf", "Jorge Rivera-Herrans", 195));
+        playlist.display();
+
+        System.out.println("\nTest 3: Remove First Song");
+        Iterator<Song> firstIterator = playlist.iterator();
+        firstIterator.next();
+        firstIterator.remove();
+        playlist.display();
+
+        System.out.println("\nTest 4: Remove Last Song");
+        Iterator<Song> lastIterator = playlist.iterator();
+        while (lastIterator.hasNext()) {
+            lastIterator.next();
+            if (!lastIterator.hasNext()) {
+                lastIterator.remove();
+            }
+        }
+        playlist.display();
+
+        System.out.println("\nTest 5: Invalid Index");
+        try {
+            playlist.get(0);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid index handled correctly.");
+        }
+
+        System.out.println("\nTest 6: Sorted Lists");
+        SortedLinkedList sorted = new SortedLinkedList(
+            Comparator.comparing(Song::getTitle, String.CASE_INSENSITIVE_ORDER)
         );
-
-        titlePlaylist.addLast(takeControl);
-        titlePlaylist.addLast(youWouldntKnow);
-        titlePlaylist.addLast(littleWolf);
-
-        System.out.println("Sorted by Title:");
-        titlePlaylist.display();
-
-        SortedLinkedList artistPlaylist = new SortedLinkedList(
-            Comparator.comparing(song -> song.getArtist(), String.CASE_INSENSITIVE_ORDER)
-        );
-
-        artistPlaylist.addLast(takeControl);
-        artistPlaylist.addLast(youWouldntKnow);
-        artistPlaylist.addLast(littleWolf);
-
-        System.out.println("\nSorted by Artist:");
-        artistPlaylist.display();
+        sorted.addLast(new Song("Take Control", "Old Gods of Asgard", 453));
+        sorted.addLast(new Song("Little Wolf", "Jorge Rivera-Herrans", 195));
+        sorted.display();
     }
 }

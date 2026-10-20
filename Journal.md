@@ -13,3 +13,7 @@ I added methods to retrieve and insert songs by index. A linked list must traver
 # Phase 4
 
 I created a SortedLinkedList that uses a Comparator to automatically organize songs by title or artist. This makes the code more flexible because I can change the sorting rule without rewriting the linked list.
+
+# Phase 5
+
+I tested adding, inserting, and removing songs, along with invalid indices and sorting. These tests helped verify that the node references and head pointer update correctly when the list changes.
